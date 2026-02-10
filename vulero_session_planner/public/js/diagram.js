@@ -306,6 +306,15 @@
 		let activeHead = null;
 		let activeTail = null;
 		let startPoint = null;
+		const drawingModes = new Set([
+			"arrow",
+			"dashed-arrow",
+			"line",
+			"dashed-line",
+			"double-arrow",
+			"wavy-line",
+			"wavy-arrow",
+		]);
 
 		const resetDrawingMode = () => {
 			canvas.isDrawingMode = false;
@@ -318,8 +327,25 @@
 			});
 		};
 
+		const clearActiveDrawing = () => {
+			if (activeShape) {
+				canvas.remove(activeShape);
+			}
+			if (activeHead) {
+				canvas.remove(activeHead);
+			}
+			if (activeTail) {
+				canvas.remove(activeTail);
+			}
+			activeShape = null;
+			activeHead = null;
+			activeTail = null;
+			startPoint = null;
+		};
+
 		const setMode = (newMode) => {
 			mode = newMode;
+			clearActiveDrawing();
 			resetDrawingMode();
 			if (mode === "brush") {
 				canvas.isDrawingMode = true;
@@ -343,6 +369,35 @@
 				originY: "center",
 			});
 			const group = new fabric.Group([circle, text], {
+				left: 80,
+				top: 80,
+				hasRotatingPoint: false,
+			});
+			canvas.add(group);
+			canvas.setActiveObject(group);
+		};
+
+		const addBall = () => {
+			const radius = 16;
+			const base = new fabric.Circle({
+				radius,
+				fill: "#ffffff",
+				stroke: "#111111",
+				strokeWidth: 2,
+				originX: "center",
+				originY: "center",
+				left: 0,
+				top: 0,
+			});
+			const centerDot = new fabric.Circle({
+				radius: 5,
+				fill: "#111111",
+				originX: "center",
+				originY: "center",
+				left: 0,
+				top: 0,
+			});
+			const group = new fabric.Group([base, centerDot], {
 				left: 80,
 				top: 80,
 				hasRotatingPoint: false,
@@ -489,6 +544,9 @@
 				activeHead = null;
 				activeTail = null;
 				startPoint = null;
+				if (drawingModes.has(mode)) {
+					setMode("select");
+				}
 			}
 		});
 
@@ -500,15 +558,19 @@
 					break;
 				case "add-home":
 					addPlayer(promptLabel("Home") || "H", "#2563eb", "#1d4ed8");
+					setMode("select");
 					break;
 				case "add-away":
 					addPlayer(promptLabel("Away") || "A", "#dc2626", "#b91c1c");
+					setMode("select");
 					break;
 				case "add-ball":
-					addPlayer("●", "#fbbf24", "#f59e0b");
+					addBall();
+					setMode("select");
 					break;
 				case "add-cone":
 					addCone();
+					setMode("select");
 					break;
 				case "arrow":
 					setMode("arrow");

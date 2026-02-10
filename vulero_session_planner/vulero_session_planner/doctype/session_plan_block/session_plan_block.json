@@ -48,7 +48,7 @@
     {
       "fieldname": "learning_activities",
       "fieldtype": "Text",
-      "label": "Learning Activities"
+      "label": "Description"
     },
     {
       "fieldname": "activities_column_break",
