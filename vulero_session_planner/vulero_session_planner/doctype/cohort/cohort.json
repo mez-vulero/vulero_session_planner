@@ -1,0 +1,86 @@
+{
+  "doctype": "DocType",
+  "name": "Cohort",
+  "module": "Vulero Session Planner",
+  "custom": 0,
+  "autoname": "field:cohort_name",
+  "title_field": "cohort_name",
+  "fields": [
+    {
+      "fieldname": "cohort_name",
+      "fieldtype": "Data",
+      "label": "Cohort Name",
+      "reqd": 1,
+      "unique": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "license_program",
+      "fieldtype": "Link",
+      "label": "License Program",
+      "options": "License Program",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "schedule_column_break",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "start_date",
+      "fieldtype": "Date",
+      "label": "Start Date",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "end_date",
+      "fieldtype": "Date",
+      "label": "End Date",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "status_section",
+      "fieldtype": "Section Break",
+      "label": "Status"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Planned\nActive\nCompleted\nArchived",
+      "default": "Planned",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "notes_section",
+      "fieldtype": "Section Break",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Text",
+      "label": "Notes"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "Head Instructor",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1
+    },
+    {
+      "role": "Instructor",
+      "read": 1,
+      "report": 1
+    },
+    {
+      "role": "Coach",
+      "read": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

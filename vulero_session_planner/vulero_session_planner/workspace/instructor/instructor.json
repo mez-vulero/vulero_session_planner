@@ -1,0 +1,197 @@
+{
+ "app": "vulero_session_planner",
+ "charts": [
+  {
+   "chart_name": "Assigned Session Plans by Status",
+   "label": "Assigned Session Plans by Status"
+  },
+  {
+   "chart_name": "Assigned Evaluations Trend",
+   "label": "Assigned Evaluations Trend"
+  },
+  {
+   "chart_name": "Assigned Review Comments Trend",
+   "label": "Assigned Review Comments Trend"
+  }
+ ],
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h2\\\">Instructor</span>\",\"col\":12}},{\"type\":\"chart\",\"data\":{\"chart_name\":\"Assigned Session Plans by Status\",\"col\":4}},{\"type\":\"chart\",\"data\":{\"chart_name\":\"Assigned Evaluations Trend\",\"col\":4}},{\"type\":\"chart\",\"data\":{\"chart_name\":\"Assigned Review Comments Trend\",\"col\":4}},{\"type\":\"spacer\",\"data\":{\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Session Plans\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Evaluations\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Review Comments\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Diagrams\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Assignments\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Coach Profiles\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Cohorts\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"License Programs\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Rubric Templates\",\"col\":4}}]",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "user",
+ "is_hidden": 0,
+ "label": "Instructor",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Session Plan",
+   "link_count": 0,
+   "link_to": "Session Plan",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Evaluation",
+   "link_count": 0,
+   "link_to": "Evaluation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Review Comment",
+   "link_count": 0,
+   "link_to": "Review Comment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Diagram",
+   "link_count": 0,
+   "link_to": "Diagram",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Assignment",
+   "link_count": 0,
+   "link_to": "Assignment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Coach Profile",
+   "link_count": 0,
+   "link_to": "Coach Profile",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cohort",
+   "link_count": 0,
+   "link_to": "Cohort",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "License Program",
+   "link_count": 0,
+   "link_to": "License Program",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Rubric Template",
+   "link_count": 0,
+   "link_to": "Rubric Template",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "module": "Vulero Session Planner",
+ "name": "Instructor",
+ "number_cards": [],
+ "parent_page": "Vulero Session Planner",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "Instructor"
+  }
+ ],
+ "sequence_id": 20.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Session Plans",
+   "link_to": "Session Plan",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Evaluations",
+   "link_to": "Evaluation",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Review Comments",
+   "link_to": "Review Comment",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Diagrams",
+   "link_to": "Diagram",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Assignments",
+   "link_to": "Assignment",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Coach Profiles",
+   "link_to": "Coach Profile",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Cohorts",
+   "link_to": "Cohort",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "License Programs",
+   "link_to": "License Program",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Rubric Templates",
+   "link_to": "Rubric Template",
+   "type": "DocType"
+  }
+ ],
+ "title": "Instructor",
+ "type": "Workspace"
+}

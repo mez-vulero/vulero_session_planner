@@ -1,0 +1,118 @@
+{
+  "doctype": "DocType",
+  "name": "Diagram",
+  "module": "Vulero Session Planner",
+  "custom": 0,
+  "autoname": "DIAG-.#####",
+  "title_field": "title",
+  "fields": [
+    {
+      "fieldname": "diagram_section",
+      "fieldtype": "Section Break",
+      "label": "Diagram"
+    },
+    {
+      "fieldname": "title",
+      "fieldtype": "Data",
+      "label": "Title",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "pitch_type",
+      "fieldtype": "Select",
+      "label": "Pitch Type",
+      "options": "Full\nHalf\nThird\nCustom",
+      "default": "Full",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "diagram_column_break",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "orientation",
+      "fieldtype": "Select",
+      "label": "Orientation",
+      "options": "Horizontal\nVertical",
+      "default": "Horizontal",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "preview_image",
+      "fieldtype": "Attach Image",
+      "label": "Preview Image"
+    },
+    {
+      "fieldname": "canvas_section",
+      "fieldtype": "Section Break",
+      "label": "Canvas"
+    },
+    {
+      "fieldname": "canvas_html",
+      "fieldtype": "HTML",
+      "label": "Tactical Board"
+    },
+    {
+      "fieldname": "diagram_json",
+      "fieldtype": "Code",
+      "label": "Diagram JSON",
+      "options": "JSON",
+      "hidden": 1
+    },
+    {
+      "fieldname": "linking_section",
+      "fieldtype": "Section Break",
+      "label": "Linking"
+    },
+    {
+      "fieldname": "linked_session_plan",
+      "fieldtype": "Link",
+      "label": "Linked Session Plan",
+      "options": "Session Plan",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "linking_column_break",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "linked_block_sequence",
+      "fieldtype": "Int",
+      "label": "Linked Block Sequence"
+    },
+    {
+      "fieldname": "meta_section",
+      "fieldtype": "Section Break",
+      "label": "Meta"
+    },
+    {
+      "fieldname": "created_by",
+      "fieldtype": "Link",
+      "label": "Created By",
+      "options": "User",
+      "read_only": 1,
+      "in_list_view": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "Head Instructor",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1
+    },
+    {
+      "role": "Instructor",
+      "read": 1
+    },
+    {
+      "role": "Coach",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

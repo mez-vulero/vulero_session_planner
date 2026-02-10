@@ -1,0 +1,171 @@
+{
+  "doctype": "DocType",
+  "name": "Evaluation",
+  "module": "Vulero Session Planner",
+  "custom": 0,
+  "autoname": "EVAL-.#####",
+  "title_field": "session_plan",
+  "track_changes": 1,
+  "fields": [
+    {
+      "fieldname": "assignment_section",
+      "fieldtype": "Section Break",
+      "label": "Assignment"
+    },
+    {
+      "fieldname": "coach",
+      "fieldtype": "Link",
+      "label": "Coach",
+      "options": "Coach Profile",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "instructor",
+      "fieldtype": "Link",
+      "label": "Instructor",
+      "options": "Instructor Profile",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "assignment_column_break",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "session_plan",
+      "fieldtype": "Link",
+      "label": "Session Plan",
+      "options": "Session Plan",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nSubmitted\nPublished",
+      "default": "Draft",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "context_section",
+      "fieldtype": "Section Break",
+      "label": "Context"
+    },
+    {
+      "fieldname": "cohort",
+      "fieldtype": "Link",
+      "label": "Cohort",
+      "options": "Cohort",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "license_program",
+      "fieldtype": "Link",
+      "label": "License Program",
+      "options": "License Program"
+    },
+    {
+      "fieldname": "context_column_break",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "session_date",
+      "fieldtype": "Date",
+      "label": "Session Date",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "location",
+      "fieldtype": "Data",
+      "label": "Location"
+    },
+    {
+      "fieldname": "summary_section",
+      "fieldtype": "Section Break",
+      "label": "Summary"
+    },
+    {
+      "fieldname": "overall_notes",
+      "fieldtype": "Text",
+      "label": "Overall Notes"
+    },
+    {
+      "fieldname": "summary_column_break",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "strengths",
+      "fieldtype": "Text",
+      "label": "Strengths"
+    },
+    {
+      "fieldname": "improvements_section",
+      "fieldtype": "Section Break",
+      "label": "Improvements"
+    },
+    {
+      "fieldname": "improvements",
+      "fieldtype": "Text",
+      "label": "Improvements"
+    },
+    {
+      "fieldname": "scores_section",
+      "fieldtype": "Section Break",
+      "label": "Scores"
+    },
+    {
+      "fieldname": "total_score",
+      "fieldtype": "Float",
+      "label": "Total Score",
+      "read_only": 1
+    },
+    {
+      "fieldname": "scores",
+      "fieldtype": "Table",
+      "label": "Scores",
+      "options": "Evaluation Score"
+    },
+    {
+      "fieldname": "evidence_section",
+      "fieldtype": "Section Break",
+      "label": "Evidence"
+    },
+    {
+      "fieldname": "block_notes",
+      "fieldtype": "Table",
+      "label": "Block Notes",
+      "options": "Evaluation Block Note"
+    },
+    {
+      "fieldname": "evidence_files",
+      "fieldtype": "Table",
+      "label": "Evidence Files",
+      "options": "Evaluation Attachment"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "Head Instructor",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "report": 1
+    },
+    {
+      "role": "Instructor",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    },
+    {
+      "role": "Coach",
+      "read": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

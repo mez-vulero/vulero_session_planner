@@ -1,0 +1,29 @@
+{
+  "name": "Vulero Session Planner",
+  "short_name": "Vulero Planner",
+  "id": "/app/vulero-session-planner",
+  "start_url": "/app/vulero-session-planner",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1f3b5b",
+  "description": "Session planner to be used by Ethiopian Football Federation during CAF coach license training",
+  "icons": [
+    {
+      "src": "/assets/vulero_session_planner/pwa/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/vulero_session_planner/pwa/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/vulero_session_planner/pwa/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

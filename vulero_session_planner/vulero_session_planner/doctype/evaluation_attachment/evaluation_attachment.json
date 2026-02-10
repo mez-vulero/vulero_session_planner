@@ -1,0 +1,25 @@
+{
+  "doctype": "DocType",
+  "name": "Evaluation Attachment",
+  "module": "Vulero Session Planner",
+  "custom": 0,
+  "istable": 1,
+  "fields": [
+    {
+      "fieldname": "file",
+      "fieldtype": "Attach",
+      "label": "File",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "attachment_column_break",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Data",
+      "label": "Description",
+      "in_list_view": 1
+    }
+  ]
+}

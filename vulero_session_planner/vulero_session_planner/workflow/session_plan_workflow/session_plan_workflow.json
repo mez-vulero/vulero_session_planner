@@ -1,0 +1,80 @@
+{
+  "doctype": "Workflow",
+  "name": "Session Plan Workflow",
+  "workflow_name": "Session Plan Workflow",
+  "document_type": "Session Plan",
+  "is_active": 1,
+  "workflow_state_field": "status",
+  "send_email_alert": 0,
+  "states": [
+    {
+      "state": "Draft",
+      "doc_status": 0,
+      "allow_edit": "Coach"
+    },
+    {
+      "state": "Submitted",
+      "doc_status": 0,
+      "allow_edit": "Instructor"
+    },
+    {
+      "state": "Changes Requested",
+      "doc_status": 0,
+      "allow_edit": "Coach"
+    },
+    {
+      "state": "Approved",
+      "doc_status": 0,
+      "allow_edit": "Head Instructor"
+    },
+    {
+      "state": "Archived",
+      "doc_status": 0,
+      "allow_edit": "Head Instructor"
+    }
+  ],
+  "transitions": [
+    {
+      "state": "Draft",
+      "action": "Submit",
+      "next_state": "Submitted",
+      "allowed": "Coach"
+    },
+    {
+      "state": "Submitted",
+      "action": "Request Changes",
+      "next_state": "Changes Requested",
+      "allowed": "Instructor"
+    },
+    {
+      "state": "Submitted",
+      "action": "Request Changes",
+      "next_state": "Changes Requested",
+      "allowed": "Head Instructor"
+    },
+    {
+      "state": "Submitted",
+      "action": "Approve",
+      "next_state": "Approved",
+      "allowed": "Instructor"
+    },
+    {
+      "state": "Submitted",
+      "action": "Approve",
+      "next_state": "Approved",
+      "allowed": "Head Instructor"
+    },
+    {
+      "state": "Changes Requested",
+      "action": "Resubmit",
+      "next_state": "Submitted",
+      "allowed": "Coach"
+    },
+    {
+      "state": "Approved",
+      "action": "Archive",
+      "next_state": "Archived",
+      "allowed": "Head Instructor"
+    }
+  ]
+}

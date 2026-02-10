@@ -1,0 +1,23 @@
+[
+  {
+    "doctype": "Role",
+    "name": "Head Instructor",
+    "role_name": "Head Instructor",
+    "desk_access": 1,
+    "disabled": 0
+  },
+  {
+    "doctype": "Role",
+    "name": "Instructor",
+    "role_name": "Instructor",
+    "desk_access": 1,
+    "disabled": 0
+  },
+  {
+    "doctype": "Role",
+    "name": "Coach",
+    "role_name": "Coach",
+    "desk_access": 1,
+    "disabled": 0
+  }
+]

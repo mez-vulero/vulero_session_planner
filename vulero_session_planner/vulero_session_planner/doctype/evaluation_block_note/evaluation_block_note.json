@@ -1,0 +1,35 @@
+{
+  "doctype": "DocType",
+  "name": "Evaluation Block Note",
+  "module": "Vulero Session Planner",
+  "custom": 0,
+  "istable": 1,
+  "fields": [
+    {
+      "fieldname": "block_sequence",
+      "fieldtype": "Int",
+      "label": "Block Sequence",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "note_column_break",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "rating",
+      "fieldtype": "Int",
+      "label": "Rating",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "note_section",
+      "fieldtype": "Section Break",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Text",
+      "label": "Notes"
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+ "charts": [],
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h2\\\">Vulero Session Planner</span>\",\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Session Plans\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Evaluations\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Cohorts\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"License Programs\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Coach Profiles\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Instructor Profiles\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Assignments\",\"col\":4}}]",
+ "creation": "2026-01-30 00:00:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "book",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Vulero Session Planner",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Session Plan",
+   "link_count": 0,
+   "link_to": "Session Plan",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Evaluation",
+   "link_count": 0,
+   "link_to": "Evaluation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cohort",
+   "link_count": 0,
+   "link_to": "Cohort",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "License Program",
+   "link_count": 0,
+   "link_to": "License Program",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Assignment",
+   "link_count": 0,
+   "link_to": "Assignment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-01-30 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Vulero Session Planner",
+ "name": "Vulero Session Planner",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "Head Instructor"
+  },
+  {
+   "role": "Instructor"
+  },
+  {
+   "role": "Coach"
+  }
+ ],
+ "sequence_id": 0.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Session Plans",
+   "link_to": "Session Plan",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Evaluations",
+   "link_to": "Evaluation",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Cohorts",
+   "link_to": "Cohort",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "License Programs",
+   "link_to": "License Program",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Coach Profiles",
+   "link_to": "Coach Profile",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Instructor Profiles",
+   "link_to": "Instructor Profile",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Assignments",
+   "link_to": "Assignment",
+   "type": "DocType"
+  }
+ ],
+ "title": "Vulero Session Planner"
+}

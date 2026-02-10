@@ -1,0 +1,26 @@
+{
+ "based_on": "creation",
+ "chart_name": "Assigned Review Comments Trend",
+ "chart_type": "Count",
+ "color": "#f4a261",
+ "docstatus": 0,
+ "doctype": "Dashboard Chart",
+ "document_type": "Review Comment",
+ "filters_json": "[]",
+ "is_public": 1,
+ "is_standard": 1,
+ "module": "Vulero Session Planner",
+ "name": "Assigned Review Comments Trend",
+ "number_of_groups": 0,
+ "owner": "Administrator",
+ "roles": [
+  {
+   "role": "Instructor"
+  }
+ ],
+ "time_interval": "Weekly",
+ "timeseries": 1,
+ "timespan": "Last Month",
+ "type": "Line",
+ "y_axis": []
+}

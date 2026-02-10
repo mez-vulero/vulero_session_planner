@@ -1,0 +1,219 @@
+{
+  "doctype": "DocType",
+  "name": "Session Plan",
+  "module": "Vulero Session Planner",
+  "custom": 0,
+  "autoname": "SP-.#####",
+  "title_field": "title",
+  "track_changes": 1,
+  "fields": [
+    {
+      "fieldname": "basics_section",
+      "fieldtype": "Section Break",
+      "label": "Basics"
+    },
+    {
+      "fieldname": "title",
+      "fieldtype": "Data",
+      "label": "Title",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "coach",
+      "fieldtype": "Link",
+      "label": "Coach",
+      "options": "Coach Profile",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "basics_column_break",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "current_instructor",
+      "fieldtype": "Link",
+      "label": "Current Instructor",
+      "options": "Instructor Profile",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nSubmitted\nChanges Requested\nApproved\nArchived",
+      "default": "Draft",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "schedule_section",
+      "fieldtype": "Section Break",
+      "label": "Schedule & Group"
+    },
+    {
+      "fieldname": "cohort",
+      "fieldtype": "Link",
+      "label": "Cohort",
+      "options": "Cohort",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "license_program",
+      "fieldtype": "Link",
+      "label": "License Program",
+      "options": "License Program",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "target_group",
+      "fieldtype": "Data",
+      "label": "Target Group"
+    },
+    {
+      "fieldname": "schedule_column_break",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "session_date",
+      "fieldtype": "Date",
+      "label": "Session Date",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "number_of_players",
+      "fieldtype": "Int",
+      "label": "Number of Players"
+    },
+    {
+      "fieldname": "duration_minutes",
+      "fieldtype": "Int",
+      "label": "Duration (Minutes)"
+    },
+    {
+      "fieldname": "plan_tab",
+      "fieldtype": "Tab Break",
+      "label": "Plan"
+    },
+    {
+      "fieldname": "theme_section",
+      "fieldtype": "Section Break",
+      "label": "Summary"
+    },
+    {
+      "fieldname": "theme",
+      "fieldtype": "Data",
+      "label": "Method"
+    },
+    {
+      "fieldname": "objectives",
+      "fieldtype": "Text",
+      "label": "Objectives",
+      "rows": 2
+    },
+    {
+      "fieldname": "performance_focus",
+      "fieldtype": "Text",
+      "label": "Performance Focus",
+      "rows": 2
+    },
+    {
+      "fieldname": "coaching_point",
+      "fieldtype": "Text",
+      "label": "Coaching Point",
+      "rows": 2
+    },
+    {
+      "fieldname": "theme_column_break",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "equipment",
+      "fieldtype": "Text",
+      "label": "Equipment",
+      "rows": 2
+    },
+    {
+      "fieldname": "drills",
+      "fieldtype": "Text",
+      "label": "Drills",
+      "rows": 2
+    },
+    {
+      "fieldname": "sequence",
+      "fieldtype": "Text",
+      "label": "Sequence",
+      "rows": 2
+    },
+    {
+      "fieldname": "blocks_section",
+      "fieldtype": "Section Break",
+      "label": "Blocks"
+    },
+    {
+      "fieldname": "blocks",
+      "fieldtype": "Table",
+      "label": "Blocks",
+      "options": "Session Plan Block"
+    },
+    {
+      "fieldname": "version_section",
+      "fieldtype": "Section Break",
+      "label": "Versioning"
+    },
+    {
+      "fieldname": "approved_version",
+      "fieldtype": "Int",
+      "label": "Approved Version",
+      "default": 0
+    },
+    {
+      "fieldname": "version_no",
+      "fieldtype": "Int",
+      "label": "Version No",
+      "default": 1
+    },
+    {
+      "fieldname": "version_column_break",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "locked",
+      "fieldtype": "Check",
+      "label": "Locked",
+      "default": 0
+    },
+    {
+      "fieldname": "revised_from",
+      "fieldtype": "Link",
+      "label": "Revised From",
+      "options": "Session Plan",
+      "read_only": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "Head Instructor",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "report": 1
+    },
+    {
+      "role": "Instructor",
+      "read": 1,
+      "write": 1,
+      "report": 1
+    },
+    {
+      "role": "Coach",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

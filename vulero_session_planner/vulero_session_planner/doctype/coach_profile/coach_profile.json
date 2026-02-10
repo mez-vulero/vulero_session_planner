@@ -1,0 +1,112 @@
+{
+  "doctype": "DocType",
+  "name": "Coach Profile",
+  "module": "Vulero Session Planner",
+  "custom": 0,
+  "autoname": "field:user",
+  "title_field": "full_name",
+  "fields": [
+    {
+      "fieldname": "user",
+      "fieldtype": "Link",
+      "label": "User",
+      "options": "User",
+      "reqd": 1,
+      "unique": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "full_name",
+      "fieldtype": "Data",
+      "label": "Full Name",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "profile_column_break",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "phone",
+      "fieldtype": "Data",
+      "label": "Phone"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Active\nExpired\nSuspended",
+      "default": "Active",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "enrollment_section",
+      "fieldtype": "Section Break",
+      "label": "Enrollment"
+    },
+    {
+      "fieldname": "license_program",
+      "fieldtype": "Link",
+      "label": "License Program",
+      "options": "License Program",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "cohort",
+      "fieldtype": "Link",
+      "label": "Cohort",
+      "options": "Cohort",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "enrollment_column_break",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "account_expiry_date",
+      "fieldtype": "Date",
+      "label": "Account Expiry Date"
+    },
+    {
+      "fieldname": "location_section",
+      "fieldtype": "Section Break",
+      "label": "Location"
+    },
+    {
+      "fieldname": "region",
+      "fieldtype": "Data",
+      "label": "Region",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "location_column_break",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "club",
+      "fieldtype": "Data",
+      "label": "Club"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "Head Instructor",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1
+    },
+    {
+      "role": "Instructor",
+      "read": 1,
+      "report": 1
+    },
+    {
+      "role": "Coach",
+      "read": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

@@ -1,0 +1,28 @@
+{
+ "chart_name": "Assigned Session Plans by Status",
+ "chart_type": "Group By",
+ "docstatus": 0,
+ "doctype": "Dashboard Chart",
+ "document_type": "Session Plan",
+ "dynamic_filters_json": "[]",
+ "filters_json": "[]",
+ "group_by_based_on": "status",
+ "group_by_type": "Count",
+ "is_public": 1,
+ "is_standard": 1,
+ "module": "Vulero Session Planner",
+ "name": "Assigned Session Plans by Status",
+ "number_of_groups": 0,
+ "owner": "Administrator",
+ "roles": [
+  {
+   "role": "Instructor"
+  }
+ ],
+ "time_interval": "Monthly",
+ "timeseries": 0,
+ "timespan": "Last Year",
+ "type": "Pie",
+ "y_axis": [],
+ "color": "#2a9d8f"
+}

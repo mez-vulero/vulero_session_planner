@@ -1,0 +1,26 @@
+{
+ "based_on": "creation",
+ "chart_name": "My Evaluations Trend",
+ "chart_type": "Count",
+ "color": "#43aa8b",
+ "docstatus": 0,
+ "doctype": "Dashboard Chart",
+ "document_type": "Evaluation",
+ "filters_json": "[]",
+ "is_public": 1,
+ "is_standard": 1,
+ "module": "Vulero Session Planner",
+ "name": "My Evaluations Trend",
+ "number_of_groups": 0,
+ "owner": "Administrator",
+ "roles": [
+  {
+   "role": "Coach"
+  }
+ ],
+ "time_interval": "Weekly",
+ "timeseries": 1,
+ "timespan": "Last Month",
+ "type": "Line",
+ "y_axis": []
+}

@@ -1,0 +1,101 @@
+{
+  "doctype": "DocType",
+  "name": "Review Comment",
+  "module": "Vulero Session Planner",
+  "custom": 0,
+  "autoname": "RC-.#####",
+  "fields": [
+    {
+      "fieldname": "comment_section",
+      "fieldtype": "Section Break",
+      "label": "Comment"
+    },
+    {
+      "fieldname": "session_plan",
+      "fieldtype": "Link",
+      "label": "Session Plan",
+      "options": "Session Plan",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "block_sequence",
+      "fieldtype": "Int",
+      "label": "Block Sequence",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "comment_column_break",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "diagram",
+      "fieldtype": "Link",
+      "label": "Diagram",
+      "options": "Diagram",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "comment_type",
+      "fieldtype": "Select",
+      "label": "Comment Type",
+      "options": "General\nRequired Change\nSuggestion",
+      "default": "General",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "comment_text_section",
+      "fieldtype": "Section Break",
+      "label": "Details"
+    },
+    {
+      "fieldname": "comment_text",
+      "fieldtype": "Text",
+      "label": "Comment Text",
+      "reqd": 1
+    },
+    {
+      "fieldname": "meta_section",
+      "fieldtype": "Section Break",
+      "label": "Meta"
+    },
+    {
+      "fieldname": "created_by",
+      "fieldtype": "Link",
+      "label": "Created By",
+      "options": "User",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "meta_column_break",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "created_on",
+      "fieldtype": "Datetime",
+      "label": "Created On",
+      "read_only": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "Head Instructor",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1
+    },
+    {
+      "role": "Instructor",
+      "read": 1,
+      "create": 1
+    },
+    {
+      "role": "Coach",
+      "read": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

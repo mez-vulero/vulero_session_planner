@@ -1,0 +1,63 @@
+{
+  "doctype": "DocType",
+  "name": "Rubric Template",
+  "module": "Vulero Session Planner",
+  "custom": 0,
+  "autoname": "field:title",
+  "title_field": "title",
+  "fields": [
+    {
+      "fieldname": "title",
+      "fieldtype": "Data",
+      "label": "Title",
+      "reqd": 1,
+      "unique": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "license_program",
+      "fieldtype": "Link",
+      "label": "License Program",
+      "options": "License Program",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "rubric_column_break",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "label": "Is Active",
+      "default": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "criteria_section",
+      "fieldtype": "Section Break",
+      "label": "Criteria"
+    },
+    {
+      "fieldname": "criteria",
+      "fieldtype": "Table",
+      "label": "Criteria",
+      "options": "Rubric Criterion"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "Head Instructor",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1
+    },
+    {
+      "role": "Instructor",
+      "read": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

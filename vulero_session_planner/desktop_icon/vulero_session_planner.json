@@ -1,0 +1,20 @@
+{
+ "app": "vulero_session_planner",
+ "creation": "2026-02-02 09:59:52.381471",
+ "docstatus": 0,
+ "doctype": "Desktop Icon",
+ "hidden": 0,
+ "icon_type": "App",
+ "idx": 0,
+ "label": "Vulero Session Planner",
+ "link": "/app/vulero-session-planner",
+ "link_type": "External",
+ "logo_url": "/assets/vulero_session_planner/logo.png",
+ "modified": "2026-02-02 09:59:52.381471",
+ "modified_by": "Administrator",
+ "name": "Vulero Session Planner",
+ "owner": "Administrator",
+ "restrict_removal": 0,
+ "roles": [],
+ "standard": 1
+}

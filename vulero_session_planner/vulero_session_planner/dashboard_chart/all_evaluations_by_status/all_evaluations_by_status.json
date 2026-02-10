@@ -1,0 +1,28 @@
+{
+ "chart_name": "All Evaluations by Status",
+ "chart_type": "Group By",
+ "docstatus": 0,
+ "doctype": "Dashboard Chart",
+ "document_type": "Evaluation",
+ "dynamic_filters_json": "[]",
+ "filters_json": "[]",
+ "group_by_based_on": "status",
+ "group_by_type": "Count",
+ "is_public": 1,
+ "is_standard": 1,
+ "module": "Vulero Session Planner",
+ "name": "All Evaluations by Status",
+ "number_of_groups": 0,
+ "owner": "Administrator",
+ "roles": [
+  {
+   "role": "Head Instructor"
+  }
+ ],
+ "time_interval": "Monthly",
+ "timeseries": 0,
+ "timespan": "Last Year",
+ "type": "Pie",
+ "y_axis": [],
+ "color": "#6c5b7b"
+}

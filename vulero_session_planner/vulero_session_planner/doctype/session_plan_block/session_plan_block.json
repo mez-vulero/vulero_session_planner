@@ -1,0 +1,83 @@
+{
+  "doctype": "DocType",
+  "name": "Session Plan Block",
+  "module": "Vulero Session Planner",
+  "custom": 0,
+  "istable": 1,
+  "fields": [
+    {
+      "fieldname": "block_section",
+      "fieldtype": "Section Break",
+      "label": "Block"
+    },
+    {
+      "fieldname": "sequence",
+      "fieldtype": "Int",
+      "label": "Sequence",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "time_minutes",
+      "fieldtype": "Int",
+      "label": "Time (Minutes)",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "block_column_break",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "block_type",
+      "fieldtype": "Select",
+      "label": "Block Type",
+      "options": "Warm Up\nTechnical\nSkill Practice\nSSG\nTactical\nPhysical\nCool Down\nOther",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "diagram",
+      "fieldtype": "Link",
+      "label": "Diagram",
+      "options": "Diagram",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "activities_section",
+      "fieldtype": "Section Break",
+      "label": "Activities"
+    },
+    {
+      "fieldname": "learning_activities",
+      "fieldtype": "Text",
+      "label": "Learning Activities"
+    },
+    {
+      "fieldname": "activities_column_break",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "coaching_points",
+      "fieldtype": "Text",
+      "label": "Coaching Points"
+    },
+    {
+      "fieldname": "qa_section",
+      "fieldtype": "Section Break",
+      "label": "Quality Assurance"
+    },
+    {
+      "fieldname": "qa_method",
+      "fieldtype": "Text",
+      "label": "QA Method"
+    },
+    {
+      "fieldname": "notes_section",
+      "fieldtype": "Section Break",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Text",
+      "label": "Notes"
+    }
+  ]
+}

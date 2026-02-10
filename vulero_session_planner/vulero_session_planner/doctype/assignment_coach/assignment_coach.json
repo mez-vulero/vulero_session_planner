@@ -1,0 +1,26 @@
+{
+  "doctype": "DocType",
+  "name": "Assignment Coach",
+  "module": "Vulero Session Planner",
+  "custom": 0,
+  "istable": 1,
+  "fields": [
+    {
+      "fieldname": "coach",
+      "fieldtype": "Link",
+      "label": "Coach",
+      "options": "Coach Profile",
+      "reqd": 1,
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "coach_name",
+      "fieldtype": "Data",
+      "label": "Coach Name",
+      "fetch_from": "coach.full_name",
+      "read_only": 1,
+      "in_list_view": 1
+    }
+  ]
+}

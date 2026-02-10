@@ -8,29 +8,39 @@ app_license = "mit"
 # Apps
 # ------------------
 
+# Fixtures
+# ------------------
+
+fixtures = [
+	{
+		"dt": "Role",
+		"filters": [["name", "in", ["Head Instructor", "Instructor", "Coach"]]],
+	}
+]
+
 # required_apps = []
 
 # Each item in the list will be shown as an app in the apps page
-# add_to_apps_screen = [
-# 	{
-# 		"name": "vulero_session_planner",
-# 		"logo": "/assets/vulero_session_planner/logo.png",
-# 		"title": "Vulero Session Planner",
-# 		"route": "/vulero_session_planner",
-# 		"has_permission": "vulero_session_planner.api.permission.has_app_permission"
-# 	}
-# ]
+add_to_apps_screen = [
+	{
+		"name": "vulero_session_planner",
+		"logo": "/assets/vulero_session_planner/logo.png",
+		"title": "Vulero Session Planner",
+		"route": "/app/vulero-session-planner",
+		"has_permission": "vulero_session_planner.api.permission.has_app_permission",
+	}
+]
 
 # Includes in <head>
 # ------------------
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/vulero_session_planner/css/vulero_session_planner.css"
-# app_include_js = "/assets/vulero_session_planner/js/vulero_session_planner.js"
+app_include_js = "/assets/vulero_session_planner/js/pwa.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/vulero_session_planner/css/vulero_session_planner.css"
-# web_include_js = "/assets/vulero_session_planner/js/vulero_session_planner.js"
+web_include_js = "/assets/vulero_session_planner/js/pwa.js"
 
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "vulero_session_planner/public/scss/website"
@@ -43,7 +53,7 @@ app_license = "mit"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {"Diagram": "public/js/diagram.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -120,13 +130,33 @@ app_license = "mit"
 # -----------
 # Permissions evaluated in scripted ways
 
-# permission_query_conditions = {
-# 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
-# }
-#
-# has_permission = {
-# 	"Event": "frappe.desk.doctype.event.event.has_permission",
-# }
+permission_query_conditions = {
+	"Session Plan": "vulero_session_planner.permissions.session_plan_permission_query_conditions",
+	"Evaluation": "vulero_session_planner.permissions.evaluation_permission_query_conditions",
+	"Review Comment": "vulero_session_planner.permissions.review_comment_permission_query_conditions",
+	"Diagram": "vulero_session_planner.permissions.diagram_permission_query_conditions",
+	"Coach Profile": "vulero_session_planner.permissions.coach_profile_permission_query_conditions",
+	"Instructor Profile": "vulero_session_planner.permissions.instructor_profile_permission_query_conditions",
+	"Assignment": "vulero_session_planner.permissions.assignment_permission_query_conditions",
+	"Cohort": "vulero_session_planner.permissions.cohort_permission_query_conditions",
+	"License Program": "vulero_session_planner.permissions.license_program_permission_query_conditions",
+	"Rubric Template": "vulero_session_planner.permissions.rubric_template_permission_query_conditions",
+	"File": "vulero_session_planner.permissions.file_permission_query_conditions",
+}
+
+has_permission = {
+	"Session Plan": "vulero_session_planner.permissions.has_session_plan_permission",
+	"Evaluation": "vulero_session_planner.permissions.has_evaluation_permission",
+	"Review Comment": "vulero_session_planner.permissions.has_review_comment_permission",
+	"Diagram": "vulero_session_planner.permissions.has_diagram_permission",
+	"Coach Profile": "vulero_session_planner.permissions.has_coach_profile_permission",
+	"Instructor Profile": "vulero_session_planner.permissions.has_instructor_profile_permission",
+	"Assignment": "vulero_session_planner.permissions.has_assignment_permission",
+	"Cohort": "vulero_session_planner.permissions.has_cohort_permission",
+	"License Program": "vulero_session_planner.permissions.has_license_program_permission",
+	"Rubric Template": "vulero_session_planner.permissions.has_rubric_template_permission",
+	"File": "vulero_session_planner.permissions.has_file_permission",
+}
 
 # Document Events
 # ---------------
@@ -143,23 +173,11 @@ app_license = "mit"
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"vulero_session_planner.tasks.all"
-# 	],
-# 	"daily": [
-# 		"vulero_session_planner.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"vulero_session_planner.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"vulero_session_planner.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"vulero_session_planner.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+	"daily": [
+		"vulero_session_planner.tasks.daily",
+	],
+}
 
 # Testing
 # -------
@@ -249,4 +267,3 @@ app_license = "mit"
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
-
