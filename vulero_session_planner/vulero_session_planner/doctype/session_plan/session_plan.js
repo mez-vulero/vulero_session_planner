@@ -1,5 +1,7 @@
 frappe.ui.form.on("Session Plan", {
 	refresh(frm) {
+		set_target_group_options(frm);
+
 		if (frm.is_new()) {
 			return;
 		}
@@ -50,4 +52,66 @@ frappe.ui.form.on("Session Plan", {
 			});
 		}
 	},
+	license_program(frm) {
+		set_target_group_options(frm);
+	},
+	cohort(frm) {
+		// Cohort changes can update license_program via server defaults
+		set_target_group_options(frm);
+	},
 });
+
+function set_target_group_options(frm) {
+	const program = frm.doc.license_program;
+	if (!program) {
+		frm.set_df_property("target_group", "options", "");
+		frm.set_value("target_group", "");
+		return;
+	}
+
+	// License Program name is the docname; use it directly for matching
+	apply_target_group_options(frm, program);
+
+	// If it doesn't match, try the program_name field
+	if (!is_known_program(program)) {
+		frappe.db.get_value("License Program", program, "program_name").then((r) => {
+			if (r && r.message && r.message.program_name) {
+				apply_target_group_options(frm, r.message.program_name);
+			}
+		});
+	}
+}
+
+function is_known_program(value) {
+	const key = normalize_program(value);
+	return (
+		key === "CAF D" ||
+		key === "CAF C" ||
+		key === "CAF B" ||
+		key === "CAF A" ||
+		key === "CAF PRO"
+	);
+}
+
+function normalize_program(value) {
+	return (value || "").toUpperCase().replace(/\s+/g, " ").trim();
+}
+
+function apply_target_group_options(frm, programValue) {
+	const key = normalize_program(programValue);
+	let options = [];
+
+	if (key === "CAF D") {
+		options = ["U12", "U11", "U10", "U9", "U8", "U7"];
+	} else if (key === "CAF C") {
+		options = ["U13", "U14", "U15", "U16", "U17", "U18", "U20", "U21"];
+	} else if (key === "CAF B" || key === "CAF A" || key === "CAF PRO") {
+		options = ["Senior Team"];
+	}
+
+	frm.set_df_property("target_group", "options", options.join("\n"));
+	if (options.length && !options.includes(frm.doc.target_group)) {
+		frm.set_value("target_group", "");
+	}
+	frm.refresh_field("target_group");
+}

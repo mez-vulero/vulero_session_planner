@@ -67,7 +67,7 @@
     },
     {
       "fieldname": "target_group",
-      "fieldtype": "Data",
+      "fieldtype": "Select",
       "label": "Target Group"
     },
     {

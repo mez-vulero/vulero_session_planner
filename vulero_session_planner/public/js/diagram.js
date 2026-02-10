@@ -291,6 +291,7 @@
   <button class="btn btn-sm btn-secondary" data-action="wavy-line">Wavy Line</button>
   <button class="btn btn-sm btn-secondary" data-action="wavy-arrow">Wavy Arrow</button>
   <button class="btn btn-sm btn-secondary" data-action="brush">Freehand</button>
+  <button class="btn btn-sm btn-secondary" data-action="remove">Remove Selected</button>
   <button class="btn btn-sm btn-secondary" data-action="undo">Undo</button>
   <button class="btn btn-sm btn-secondary" data-action="clear">Clear</button>
   <button class="btn btn-sm btn-primary" data-action="save">Save Diagram</button>
@@ -533,6 +534,9 @@
 				case "brush":
 					setMode("brush");
 					break;
+				case "remove":
+					removeSelected(canvas);
+					break;
 				case "undo":
 					undo(canvas);
 					break;
@@ -592,6 +596,24 @@
 				return;
 			}
 		}
+	}
+
+	function removeSelected(canvas) {
+		const active = canvas.getActiveObject();
+		if (!active || active.isBackground) {
+			return;
+		}
+		if (active.type === "activeSelection") {
+			active.forEachObject((obj) => {
+				if (!obj.isBackground) {
+					canvas.remove(obj);
+				}
+			});
+			canvas.discardActiveObject();
+		} else {
+			canvas.remove(active);
+		}
+		canvas.requestRenderAll();
 	}
 
 	function clearObjects(canvas) {
