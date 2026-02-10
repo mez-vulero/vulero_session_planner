@@ -15,9 +15,9 @@ class ReviewComment(Document):
 	def validate(self):
 		if self.is_new():
 			return
-		if not user_has_role("Head Instructor"):
+		if not user_has_role("Coach Education Head"):
 			frappe.throw("Review comments are immutable.", title="Not Permitted")
 
 	def on_trash(self):
-		if not user_has_role("Head Instructor"):
-			frappe.throw("Only Head Instructor can delete review comments.")
+		if not user_has_role("Coach Education Head"):
+			frappe.throw("Only Coach Education Head can delete review comments.")

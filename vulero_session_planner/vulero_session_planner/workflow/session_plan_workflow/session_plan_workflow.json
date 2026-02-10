@@ -25,12 +25,12 @@
     {
       "state": "Approved",
       "doc_status": 0,
-      "allow_edit": "Head Instructor"
+      "allow_edit": "Coach Education Head"
     },
     {
       "state": "Archived",
       "doc_status": 0,
-      "allow_edit": "Head Instructor"
+      "allow_edit": "Coach Education Head"
     }
   ],
   "transitions": [
@@ -50,7 +50,7 @@
       "state": "Submitted",
       "action": "Request Changes",
       "next_state": "Changes Requested",
-      "allowed": "Head Instructor"
+      "allowed": "Coach Education Head"
     },
     {
       "state": "Submitted",
@@ -62,7 +62,7 @@
       "state": "Submitted",
       "action": "Approve",
       "next_state": "Approved",
-      "allowed": "Head Instructor"
+      "allowed": "Coach Education Head"
     },
     {
       "state": "Changes Requested",
@@ -74,7 +74,7 @@
       "state": "Approved",
       "action": "Archive",
       "next_state": "Archived",
-      "allowed": "Head Instructor"
+      "allowed": "Coach Education Head"
     }
   ]
 }

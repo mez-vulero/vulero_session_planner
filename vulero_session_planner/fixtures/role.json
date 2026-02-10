@@ -1,8 +1,8 @@
 [
   {
     "doctype": "Role",
-    "name": "Head Instructor",
-    "role_name": "Head Instructor",
+    "name": "Coach Education Head",
+    "role_name": "Coach Education Head",
     "desk_access": 1,
     "disabled": 0
   },

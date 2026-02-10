@@ -5,7 +5,7 @@ frappe.ui.form.on("Session Plan", {
 		}
 		const canRevise =
 			frm.doc.status === "Approved" &&
-			(frappe.user.has_role("Coach") || frappe.user.has_role("Head Instructor"));
+			(frappe.user.has_role("Coach") || frappe.user.has_role("Coach Education Head"));
 		const canEvaluate =
 			frm.doc.status === "Approved" && frappe.user.has_role("Instructor");
 

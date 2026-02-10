@@ -30,7 +30,7 @@ def update_expired_accounts():
 		frappe.db.set_value("Coach Profile", row.name, "status", "Expired")
 		if row.user:
 			notify_users(
-				[row.user] + get_users_with_role("Head Instructor"),
+				[row.user] + get_users_with_role("Coach Education Head"),
 				subject="Coach account expired",
 				document_type="Coach Profile",
 				document_name=row.name,
@@ -46,7 +46,7 @@ def send_expiry_warnings(days_before=7):
 	)
 	for row in warnings:
 		recipients = [user for user in [row.user] if user]
-		recipients += get_users_with_role("Head Instructor")
+		recipients += get_users_with_role("Coach Education Head")
 		if recipients:
 			notify_users(
 				recipients,

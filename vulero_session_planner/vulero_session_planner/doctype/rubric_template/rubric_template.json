@@ -46,7 +46,7 @@
   ],
   "permissions": [
     {
-      "role": "Head Instructor",
+      "role": "Coach Education Head",
       "read": 1,
       "write": 1,
       "create": 1,

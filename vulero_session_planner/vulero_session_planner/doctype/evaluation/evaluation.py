@@ -45,7 +45,7 @@ class Evaluation(Document):
 
 	def _ensure_editable(self):
 		previous = self._get_previous_status()
-		if previous == "Published" and not user_has_role("Head Instructor"):
+		if previous == "Published" and not user_has_role("Coach Education Head"):
 			frappe.throw("Published evaluations are read-only.")
 
 	def _validate_scores(self):
@@ -68,7 +68,7 @@ class Evaluation(Document):
 
 	def _notify_published(self):
 		coach_user = frappe.db.get_value("Coach Profile", self.coach, "user")
-		recipients = set(get_users_with_role("Head Instructor"))
+		recipients = set(get_users_with_role("Coach Education Head"))
 		if coach_user:
 			recipients.add(coach_user)
 		if recipients:
@@ -88,5 +88,5 @@ class Evaluation(Document):
 		return previous != status and self.status == status
 
 	def on_trash(self):
-		if self.status == "Published" and not user_has_role("Head Instructor"):
+		if self.status == "Published" and not user_has_role("Coach Education Head"):
 			frappe.throw("Published evaluations cannot be deleted.")

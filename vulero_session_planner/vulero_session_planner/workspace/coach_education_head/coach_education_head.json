@@ -14,7 +14,7 @@
    "label": "All Session Plans Trend"
   }
  ],
- "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h2\\\">Head Instructor</span>\",\"col\":12}},{\"type\":\"chart\",\"data\":{\"chart_name\":\"All Session Plans by Status\",\"col\":4}},{\"type\":\"chart\",\"data\":{\"chart_name\":\"All Evaluations by Status\",\"col\":4}},{\"type\":\"chart\",\"data\":{\"chart_name\":\"All Session Plans Trend\",\"col\":4}},{\"type\":\"spacer\",\"data\":{\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Session Plans\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Evaluations\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Review Comments\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Diagrams\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Assignments\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Coach Profiles\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Instructor Profiles\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Cohorts\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"License Programs\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Rubric Templates\",\"col\":4}}]",
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h2\\\">Coach Education Head</span>\",\"col\":12}},{\"type\":\"chart\",\"data\":{\"chart_name\":\"All Session Plans by Status\",\"col\":4}},{\"type\":\"chart\",\"data\":{\"chart_name\":\"All Evaluations by Status\",\"col\":4}},{\"type\":\"chart\",\"data\":{\"chart_name\":\"All Session Plans Trend\",\"col\":4}},{\"type\":\"spacer\",\"data\":{\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Session Plans\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Evaluations\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Review Comments\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Diagrams\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Assignments\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Coach Profiles\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Instructor Profiles\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Cohorts\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"License Programs\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Rubric Templates\",\"col\":4}}]",
  "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
@@ -22,7 +22,7 @@
  "hide_custom": 0,
  "icon": "shield",
  "is_hidden": 0,
- "label": "Head Instructor",
+ "label": "Coach Education Head",
  "links": [
   {
    "hidden": 0,
@@ -126,14 +126,14 @@
   }
  ],
  "module": "Vulero Session Planner",
- "name": "Head Instructor",
+ "name": "Coach Education Head",
  "number_cards": [],
  "parent_page": "Vulero Session Planner",
  "public": 1,
  "quick_lists": [],
  "roles": [
   {
-   "role": "Head Instructor"
+   "role": "Coach Education Head"
   }
  ],
  "sequence_id": 10.0,
@@ -209,6 +209,6 @@
    "type": "DocType"
   }
  ],
- "title": "Head Instructor",
+ "title": "Coach Education Head",
  "type": "Workspace"
 }

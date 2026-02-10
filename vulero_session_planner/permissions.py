@@ -9,7 +9,7 @@ from vulero_session_planner.utils import (
 
 
 def _has_full_access(user):
-	return user in {"Administrator"} or user_has_role("Head Instructor", user) or user_has_role(
+	return user in {"Administrator"} or user_has_role("Coach Education Head", user) or user_has_role(
 		"System Manager", user
 	)
 
@@ -371,6 +371,12 @@ def has_review_comment_permission(doc, ptype, user):
 def has_diagram_permission(doc, ptype, user):
 	if _has_full_access(user):
 		return True
+
+	if ptype == "create":
+		return user_has_role("Coach", user)
+
+	if not doc:
+		return False
 
 	if doc.created_by == user:
 		return True

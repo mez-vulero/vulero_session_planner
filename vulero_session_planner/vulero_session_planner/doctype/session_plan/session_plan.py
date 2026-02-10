@@ -56,14 +56,14 @@ class SessionPlan(Document):
 		if previous == "Submitted" and self.status == "Submitted" and is_coach:
 			frappe.throw("Submitted session plans are read-only for coaches.")
 
-		if previous == "Approved" and self.status == "Approved" and not user_has_role("Head Instructor"):
+		if previous == "Approved" and self.status == "Approved" and not user_has_role("Coach Education Head"):
 			frappe.throw("Approved session plans are read-only.")
 
-		if self.status == "Archived" and not user_has_role("Head Instructor"):
-			frappe.throw("Only Head Instructor can archive session plans.")
+		if self.status == "Archived" and not user_has_role("Coach Education Head"):
+			frappe.throw("Only Coach Education Head can archive session plans.")
 
 	def _allow_locked_transition(self, previous):
-		if user_has_role("Head Instructor") and self.status == "Archived":
+		if user_has_role("Coach Education Head") and self.status == "Archived":
 			return True
 		if previous != self.status and self.status == "Archived":
 			return True
@@ -127,7 +127,7 @@ class SessionPlan(Document):
 	def _notify_submitted(self):
 		coach_user = self._get_coach_user()
 		instructor_users = get_instructor_users_for_coach(self.coach, self.cohort)
-		recipients = set(instructor_users + get_users_with_role("Head Instructor"))
+		recipients = set(instructor_users + get_users_with_role("Coach Education Head"))
 		if coach_user:
 			recipients.discard(coach_user)
 		if recipients:
@@ -149,7 +149,7 @@ class SessionPlan(Document):
 			)
 
 	def _notify_approved(self):
-		recipients = set(get_users_with_role("Head Instructor"))
+		recipients = set(get_users_with_role("Coach Education Head"))
 		coach_user = self._get_coach_user()
 		if coach_user:
 			recipients.add(coach_user)
@@ -228,7 +228,7 @@ def create_revision(session_plan_name):
 	if plan.status != "Approved":
 		frappe.throw("Only approved session plans can be revised.")
 
-	if not (user_has_role("Head Instructor") or _is_current_user_coach(plan.coach)):
+	if not (user_has_role("Coach Education Head") or _is_current_user_coach(plan.coach)):
 		frappe.throw("Not permitted to create a revision for this session plan.")
 
 	new_plan = frappe.copy_doc(plan)

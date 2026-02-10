@@ -105,7 +105,7 @@ def notify_users(users, subject, document_type=None, document_name=None):
 
 def ensure_user_not_expired(user=None):
 	user = user or frappe.session.user
-	if user == "Administrator" or user_has_role("Head Instructor", user):
+	if user == "Administrator" or user_has_role("Coach Education Head", user):
 		return
 
 	coach = frappe.db.get_value(
@@ -115,7 +115,7 @@ def ensure_user_not_expired(user=None):
 		return
 
 	if coach.status in {"Expired", "Suspended"}:
-		frappe.throw("Your account is expired or suspended. Contact the Head Instructor.")
+		frappe.throw("Your account is expired or suspended. Contact the Coach Education Head.")
 
 	if coach.account_expiry_date and coach.account_expiry_date < nowdate():
-		frappe.throw("Your account has expired. Contact the Head Instructor.")
+		frappe.throw("Your account has expired. Contact the Coach Education Head.")

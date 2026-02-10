@@ -10,7 +10,7 @@
    "indent": 0,
    "keep_closed": 0,
    "label": "Home",
-   "link_to": "Head Instructor",
+   "link_to": "Coach Education Head",
    "link_type": "Workspace",
    "show_arrow": 0,
    "type": "Link",
@@ -128,8 +128,8 @@
   }
  ],
  "module": "Vulero Session Planner",
- "name": "Head Instructor",
+ "name": "Coach Education Head",
  "owner": "Administrator",
  "standard": 1,
- "title": "Head Instructor"
+ "title": "Coach Education Head"
 }

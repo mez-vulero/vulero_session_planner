@@ -8,5 +8,5 @@ def has_app_permission(user=None):
 	if user in {"Administrator", "Guest"}:
 		return user == "Administrator"
 
-	allowed_roles = {"Head Instructor", "Instructor", "Coach", "System Manager"}
+	allowed_roles = {"Coach Education Head", "Instructor", "Coach", "System Manager"}
 	return any(user_has_role(role, user) for role in allowed_roles)

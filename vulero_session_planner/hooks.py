@@ -14,7 +14,7 @@ app_license = "mit"
 fixtures = [
 	{
 		"dt": "Role",
-		"filters": [["name", "in", ["Head Instructor", "Instructor", "Coach"]]],
+		"filters": [["name", "in", ["Coach Education Head", "Instructor", "Coach"]]],
 	}
 ]
 
