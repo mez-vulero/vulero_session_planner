@@ -41,6 +41,12 @@
       "in_list_view": 1
     },
     {
+      "fieldname": "diagram_preview",
+      "fieldtype": "Attach Image",
+      "label": "Diagram Preview",
+      "read_only": 1
+    },
+    {
       "fieldname": "activities_section",
       "fieldtype": "Section Break",
       "label": "Activities"

@@ -61,6 +61,20 @@ frappe.ui.form.on("Session Plan", {
 	},
 });
 
+frappe.ui.form.on("Session Plan Block", {
+	diagram(frm, cdt, cdn) {
+		const row = locals[cdt][cdn];
+		if (!row || !row.diagram) {
+			frappe.model.set_value(cdt, cdn, "diagram_preview", "");
+			return;
+		}
+		frappe.db.get_value("Diagram", row.diagram, "preview_image").then((r) => {
+			const preview = r && r.message ? r.message.preview_image : "";
+			frappe.model.set_value(cdt, cdn, "diagram_preview", preview || "");
+		});
+	},
+});
+
 function set_target_group_options(frm) {
 	const program = frm.doc.license_program;
 	if (!program) {
