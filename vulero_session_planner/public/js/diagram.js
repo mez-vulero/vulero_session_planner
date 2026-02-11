@@ -133,66 +133,61 @@
 		const fullLength = fieldLength * lengthScale;
 		const fullBreadth = fieldBreadth;
 
-		const addLine = (x1, y1, x2, y2) => {
-			const line = new fabric.Line([x1, y1, x2, y2], {
-				stroke: "#ffffff",
-				strokeWidth: 2,
-				selectable: false,
-				evented: false,
-				isBackground: true,
-			});
-			canvas.add(line);
-			canvas.sendToBack(line);
+		const addPitchObj = (obj, sendToBack = false) => {
+			obj.selectable = false;
+			obj.evented = false;
+			obj.isBackground = true;
+			canvas.add(obj);
+			if (sendToBack) {
+				canvas.sendToBack(obj);
+			}
 		};
 
-		const addRect = (x, y, w, h) => {
-			const rect = new fabric.Rect({
-				left: x,
-				top: y,
-				width: w,
-				height: h,
-				fill: "",
-				stroke: "#ffffff",
-				strokeWidth: 2,
-				selectable: false,
-				evented: false,
-				isBackground: true,
-			});
-			canvas.add(rect);
-			canvas.sendToBack(rect);
-		};
+		const addLine = (x1, y1, x2, y2) =>
+			addPitchObj(
+				new fabric.Line([x1, y1, x2, y2], {
+					stroke: "#ffffff",
+					strokeWidth: 2,
+				})
+			);
 
-		const addCircle = (cx, cy, r) => {
-			const circle = new fabric.Circle({
-				left: cx - r,
-				top: cy - r,
-				radius: r,
-				fill: "",
-				stroke: "#ffffff",
-				strokeWidth: 2,
-				selectable: false,
-				evented: false,
-				isBackground: true,
-			});
-			canvas.add(circle);
-			canvas.sendToBack(circle);
-		};
+		const addRect = (x, y, w, h, fill = "", sendToBack = false) =>
+			addPitchObj(
+				new fabric.Rect({
+					left: x,
+					top: y,
+					width: w,
+					height: h,
+					fill,
+					stroke: fill ? "" : "#ffffff",
+					strokeWidth: fill ? 0 : 2,
+				}),
+				sendToBack
+			);
 
-		const addSpot = (cx, cy, r = 3) => {
-			const spot = new fabric.Circle({
-				left: cx - r,
-				top: cy - r,
-				radius: r,
-				fill: "#ffffff",
-				stroke: "#ffffff",
-				strokeWidth: 1,
-				selectable: false,
-				evented: false,
-				isBackground: true,
-			});
-			canvas.add(spot);
-			canvas.sendToBack(spot);
-		};
+		const addCircle = (cx, cy, r) =>
+			addPitchObj(
+				new fabric.Circle({
+					left: cx - r,
+					top: cy - r,
+					radius: r,
+					fill: "",
+					stroke: "#ffffff",
+					strokeWidth: 2,
+				})
+			);
+
+		const addSpot = (cx, cy, r = 3) =>
+			addPitchObj(
+				new fabric.Circle({
+					left: cx - r,
+					top: cy - r,
+					radius: r,
+					fill: "#ffffff",
+					stroke: "#ffffff",
+					strokeWidth: 1,
+				})
+			);
 
 		const mapPoint = (u, v) => ({
 			x: isVertical ? left + v : left + u,
@@ -209,6 +204,16 @@
 				h: Math.abs(p2.y - p1.y),
 			};
 		};
+
+		// Stripes (vertical bands along pitch length)
+		const stripeCount = 12;
+		for (let i = 0; i < stripeCount; i += 1) {
+			const uStart = (fieldLength / stripeCount) * i;
+			const uEnd = (fieldLength / stripeCount) * (i + 1);
+			const stripe = rectFromUV(uStart, 0, uEnd, fieldBreadth);
+			const color = i % 2 === 0 ? "#0b8d2f" : "#0a7a2a";
+			addRect(stripe.x, stripe.y, stripe.w, stripe.h, color, true);
+		}
 
 		// Border
 		addRect(left, top, fieldWidth, fieldHeight);
@@ -235,22 +240,82 @@
 			addSpot(spot.x, spot.y);
 		};
 
-		const addArc = (cx, cy, r, startAngle, endAngle) => {
-			const arc = new fabric.Circle({
-				left: cx - r,
-				top: cy - r,
-				radius: r,
-				startAngle,
-				endAngle,
-				fill: "",
-				stroke: "#ffffff",
-				strokeWidth: 2,
-				selectable: false,
-				evented: false,
-				isBackground: true,
-			});
-			canvas.add(arc);
-			canvas.sendToBack(arc);
+		const addArcUV = (u, v, r, startAngle, endAngle) => {
+			let delta = endAngle - startAngle;
+			if (delta < 0) {
+				delta += Math.PI * 2;
+			}
+			const segments = 24;
+			const points = [];
+			for (let i = 0; i <= segments; i += 1) {
+				const angle = startAngle + (delta * i) / segments;
+				const p = mapPoint(u + r * Math.cos(angle), v + r * Math.sin(angle));
+				points.push({ x: p.x, y: p.y });
+			}
+			addPitchObj(
+				new fabric.Polyline(points, {
+					fill: "",
+					stroke: "#ffffff",
+					strokeWidth: 2,
+					strokeLineCap: "round",
+					strokeLineJoin: "round",
+				})
+			);
+		};
+
+		const addCornerArc = (corner) => {
+			const r = Math.min(fieldBreadth, fieldLength) * 0.04;
+			let cx = 0;
+			let cy = 0;
+			let start = 0;
+			let end = 0;
+
+			if (corner === "top-left") {
+				cx = 0;
+				cy = 0;
+				start = 0;
+				end = Math.PI / 2;
+			} else if (corner === "top-right") {
+				cx = fieldLength;
+				cy = 0;
+				start = Math.PI / 2;
+				end = Math.PI;
+			} else if (corner === "bottom-right") {
+				cx = fieldLength;
+				cy = fieldBreadth;
+				start = Math.PI;
+				end = Math.PI * 1.5;
+			} else if (corner === "bottom-left") {
+				cx = 0;
+				cy = fieldBreadth;
+				start = Math.PI * 1.5;
+				end = Math.PI * 2;
+			}
+
+			addArcUV(cx, cy, r, start, end);
+		};
+
+		const addGoal = (goalU, direction) => {
+			const maxDepth = Math.max(6, CANVAS_MARGIN - 2);
+			const depth = Math.min(fullLength * 0.03, maxDepth);
+			const width = fullBreadth * 0.18;
+			const vStart = (fieldBreadth - width) / 2;
+			const goalRect = rectFromUV(goalU, vStart, goalU + direction * depth, vStart + width);
+			addRect(goalRect.x, goalRect.y, goalRect.w, goalRect.h);
+		};
+
+		const addPenaltyArc = (goalU, direction) => {
+			const arcCenterU = goalU + direction * penaltySpotDistance;
+			const arcRadius = fullLength * 0.0915;
+			const lineU = goalU + direction * penaltyDepth;
+			const d = Math.abs(lineU - arcCenterU);
+			if (!arcRadius || d >= arcRadius) {
+				return;
+			}
+			const theta = Math.acos(d / arcRadius);
+			const start = direction === 1 ? -theta : Math.PI - theta;
+			const end = direction === 1 ? theta : Math.PI + theta;
+			addArcUV(arcCenterU, fieldBreadth / 2, arcRadius, start, end);
 		};
 
 		if (pitchType === "Full" || pitchType === "Custom") {
@@ -261,40 +326,147 @@
 
 			const center = mapPoint(fieldLength / 2, fieldBreadth / 2);
 			addCircle(center.x, center.y, centerCircleRadius);
+			addSpot(center.x, center.y, 2.5);
 
 			drawPenaltyArea(0, 1);
 			drawPenaltyArea(fieldLength, -1);
+			addPenaltyArc(0, 1);
+			addPenaltyArc(fieldLength, -1);
+			addGoal(0, -1);
+			addGoal(fieldLength, 1);
+			addCornerArc("top-left");
+			addCornerArc("top-right");
+			addCornerArc("bottom-right");
+			addCornerArc("bottom-left");
 		} else if (pitchType === "Half") {
 			drawPenaltyArea(0, 1);
-			const center = mapPoint(fieldLength, fieldBreadth / 2);
-			const start = isVertical ? 0 : Math.PI / 2;
-			const end = isVertical ? Math.PI : Math.PI * 1.5;
-			addArc(center.x, center.y, centerCircleRadius, start, end);
+			addArcUV(fieldLength, fieldBreadth / 2, centerCircleRadius, Math.PI / 2, Math.PI * 1.5);
+			addPenaltyArc(0, 1);
+			addGoal(0, -1);
+			addCornerArc("top-left");
+			addCornerArc("bottom-left");
 		} else if (pitchType === "Third") {
 			drawPenaltyArea(0, 1);
+			addPenaltyArc(0, 1);
+			addGoal(0, -1);
+			addCornerArc("top-left");
+			addCornerArc("bottom-left");
 		}
+
 	}
 
 	function build_toolbar_html() {
 		return `
-<div class="diagram-toolbar" style="display:flex;gap:8px;flex-wrap:wrap;">
-  <button class="btn btn-sm btn-secondary" data-action="select">Select/Move</button>
-  <button class="btn btn-sm btn-secondary" data-action="add-home">Add Home</button>
-  <button class="btn btn-sm btn-secondary" data-action="add-away">Add Away</button>
-  <button class="btn btn-sm btn-secondary" data-action="add-ball">Add Ball</button>
-  <button class="btn btn-sm btn-secondary" data-action="add-cone">Add Cone</button>
-  <button class="btn btn-sm btn-secondary" data-action="arrow">Arrow</button>
-  <button class="btn btn-sm btn-secondary" data-action="dashed-arrow">Dashed Arrow</button>
-  <button class="btn btn-sm btn-secondary" data-action="line">Line</button>
-  <button class="btn btn-sm btn-secondary" data-action="dashed-line">Dashed Line</button>
-  <button class="btn btn-sm btn-secondary" data-action="double-arrow">Double Arrow</button>
-  <button class="btn btn-sm btn-secondary" data-action="wavy-line">Wavy Line</button>
-  <button class="btn btn-sm btn-secondary" data-action="wavy-arrow">Wavy Arrow</button>
-  <button class="btn btn-sm btn-secondary" data-action="brush">Freehand</button>
-  <button class="btn btn-sm btn-secondary" data-action="remove">Remove Selected</button>
-  <button class="btn btn-sm btn-secondary" data-action="undo">Undo</button>
-  <button class="btn btn-sm btn-secondary" data-action="clear">Clear</button>
-  <button class="btn btn-sm btn-primary" data-action="save">Save Diagram</button>
+<div class="diagram-toolbar" style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;">
+  <div style="display:grid;grid-template-columns:repeat(2, max-content);gap:8px 16px;align-items:start;">
+    <button class="btn btn-sm btn-secondary" data-action="select" title="Select/Move" aria-label="Select/Move">
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M3 2 L12 8 L8.5 9 L11.5 14 L9.8 14.7 L7 9.8 L4.5 12 Z" fill="currentColor"/>
+      </svg>
+      <span style="margin-left:6px;">Select</span>
+    </button>
+
+    <div style="display:flex;gap:6px;align-items:center;">
+      <button class="btn btn-sm btn-secondary" data-action="player" title="Player" aria-label="Player">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+          <circle cx="8" cy="4.5" r="3" fill="currentColor"/>
+          <path d="M2.5 14c1.5-3 9.5-3 11 0" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        </svg>
+        <span style="margin-left:6px;">Player</span>
+      </button>
+      <select class="input-sm" data-select="player-color">
+        <option value="#2563eb">Blue</option>
+      <option value="#dc2626">Red</option>
+      <option value="#f97316">Orange</option>
+      <option value="#facc15">Yellow</option>
+      <option value="#9333ea">Purple</option>
+      <option value="#0ea5e9">Sky</option>
+      <option value="#ec4899">Pink</option>
+      <option value="#a855f7">Violet</option>
+      <option value="#a16207">Brown</option>
+        <option value="#8b5cf6">Indigo</option>
+      </select>
+    </div>
+
+    <button class="btn btn-sm btn-secondary" data-action="add-ball" title="Ball" aria-label="Ball">
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+        <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        <polygon points="8,3.2 10.6,4.8 9.7,7.6 6.3,7.6 5.4,4.8" fill="currentColor"/>
+        <path d="M5.4 4.8 L3.2 6.2 L4.2 9" stroke="currentColor" stroke-width="1" fill="none"/>
+        <path d="M10.6 4.8 L12.8 6.2 L11.8 9" stroke="currentColor" stroke-width="1" fill="none"/>
+        <path d="M6.3 7.6 L5.2 10.6 L8 12.6 L10.8 10.6 L9.7 7.6" stroke="currentColor" stroke-width="1" fill="none"/>
+      </svg>
+      <span style="margin-left:6px;">Ball</span>
+    </button>
+
+    <div style="display:flex;gap:6px;align-items:center;">
+      <button class="btn btn-sm btn-secondary" data-action="cone" title="Cone" aria-label="Cone">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M8 2 L14 14 H2 Z" fill="currentColor"/>
+        </svg>
+        <span style="margin-left:6px;">Cone</span>
+      </button>
+      <select class="input-sm" data-select="cone-color">
+        <option value="#f97316">Orange</option>
+        <option value="#facc15">Yellow</option>
+      </select>
+    </div>
+
+    <div style="display:flex;gap:6px;align-items:center;">
+      <button class="btn btn-sm btn-secondary" data-action="marker" title="Marker" aria-label="Marker">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+          <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <circle cx="8" cy="8" r="2" fill="currentColor"/>
+        </svg>
+        <span style="margin-left:6px;">Marker</span>
+      </button>
+      <select class="input-sm" data-select="marker-color">
+        <option value="#facc15">Yellow</option>
+        <option value="#dc2626">Red</option>
+        <option value="#2563eb">Blue</option>
+        <option value="#f97316">Orange</option>
+      </select>
+    </div>
+
+    <div style="display:flex;gap:6px;align-items:center;">
+      <button class="btn btn-sm btn-secondary" data-action="arrows" title="Arrows/Lines" aria-label="Arrows/Lines">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M2 8 H12" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M9 5 L13 8 L9 11" fill="currentColor"/>
+      </svg>
+      <span style="margin-left:6px;">Arrows</span>
+    </button>
+    <select class="input-sm" data-select="arrow-type">
+      <option value="arrow">-></option>
+      <option value="dashed-arrow">- - -></option>
+      <option value="line">________</option>
+        <option value="dashed-line">- - -</option>
+        <option value="double-arrow"><-></option>
+        <option value="wavy-line">~</option>
+        <option value="wavy-arrow">~></option>
+      </select>
+    </div>
+
+    <button class="btn btn-sm btn-secondary" data-action="text" title="Add Text" aria-label="Add Text">
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M3 3 H13" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M8 3 V13" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span style="margin-left:6px;">Text</span>
+    </button>
+    <button class="btn btn-sm btn-secondary" data-action="brush" title="Freehand" aria-label="Freehand">
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M2 11 C4 7, 6 13, 8 9 C10 5, 12 11, 14 7" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      </svg>
+      <span style="margin-left:6px;">Freehand</span>
+    </button>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;">
+    <button class="btn btn-sm btn-secondary" data-action="remove">Remove Selected</button>
+    <button class="btn btn-sm btn-secondary" data-action="undo">Undo</button>
+    <button class="btn btn-sm btn-secondary" data-action="clear">Clear</button>
+    <button class="btn btn-sm btn-primary" data-action="save">Save Diagram</button>
+  </div>
 </div>
 `;
 	}
@@ -360,6 +532,7 @@
 				fill,
 				stroke,
 				strokeWidth: 2,
+				name: "player-body",
 			});
 			const text = new fabric.Text(label, {
 				fontSize: 12,
@@ -367,18 +540,20 @@
 				fontWeight: "bold",
 				originX: "center",
 				originY: "center",
+				name: "player-label",
 			});
 			const group = new fabric.Group([circle, text], {
 				left: 80,
 				top: 80,
 				hasRotatingPoint: false,
+				data: { shapeType: "player" },
 			});
 			canvas.add(group);
 			canvas.setActiveObject(group);
 		};
 
 		const addBall = () => {
-			const radius = 16;
+			const radius = 18;
 			const base = new fabric.Circle({
 				radius,
 				fill: "#ffffff",
@@ -389,15 +564,44 @@
 				left: 0,
 				top: 0,
 			});
-			const centerDot = new fabric.Circle({
-				radius: 5,
+
+			const polygonPoints = (sides, r, rotationDeg = -90) => {
+				const points = [];
+				for (let i = 0; i < sides; i += 1) {
+					const angle = ((rotationDeg + (360 / sides) * i) * Math.PI) / 180;
+					points.push({ x: Math.cos(angle) * r, y: Math.sin(angle) * r });
+				}
+				return points;
+			};
+
+			const centerPentagon = new fabric.Polygon(polygonPoints(5, radius * 0.45), {
 				fill: "#111111",
+				stroke: "#111111",
+				strokeWidth: 1,
 				originX: "center",
 				originY: "center",
 				left: 0,
 				top: 0,
 			});
-			const group = new fabric.Group([base, centerDot], {
+
+			const patches = [];
+			const ringDistance = radius * 0.78;
+			for (let i = 0; i < 5; i += 1) {
+				const angleDeg = -90 + i * 72;
+				const angle = (angleDeg * Math.PI) / 180;
+				const patch = new fabric.Polygon(polygonPoints(5, radius * 0.22, angleDeg), {
+					fill: "#111111",
+					stroke: "#111111",
+					strokeWidth: 1,
+					originX: "center",
+					originY: "center",
+					left: Math.cos(angle) * ringDistance,
+					top: Math.sin(angle) * ringDistance,
+				});
+				patches.push(patch);
+			}
+
+			const group = new fabric.Group([base, centerPentagon, ...patches], {
 				left: 80,
 				top: 80,
 				hasRotatingPoint: false,
@@ -406,18 +610,65 @@
 			canvas.setActiveObject(group);
 		};
 
-		const addCone = () => {
+		const addCone = (fill) => {
 			const triangle = new fabric.Triangle({
 				width: 28,
 				height: 30,
-				fill: "#f97316",
-				stroke: "#ea580c",
+				fill,
+				stroke: "#111111",
 				strokeWidth: 2,
 				left: 100,
 				top: 100,
+				data: { shapeType: "cone" },
 			});
 			canvas.add(triangle);
 			canvas.setActiveObject(triangle);
+		};
+
+		const addMarker = (fill) => {
+			const radius = 14;
+			const base = new fabric.Circle({
+				radius,
+				fill,
+				stroke: "#111111",
+				strokeWidth: 2,
+				originX: "center",
+				originY: "center",
+				left: 0,
+				top: 0,
+				name: "marker-body",
+			});
+			const dot = new fabric.Circle({
+				radius: 4,
+				fill: "#111111",
+				originX: "center",
+				originY: "center",
+				left: 0,
+				top: 0,
+				name: "marker-dot",
+			});
+			const group = new fabric.Group([base, dot], {
+				left: 100,
+				top: 100,
+				hasRotatingPoint: false,
+				data: { shapeType: "marker" },
+			});
+			canvas.add(group);
+			canvas.setActiveObject(group);
+		};
+
+		const addText = () => {
+			const text = new fabric.Textbox("Text", {
+				left: 120,
+				top: 120,
+				fontSize: 16,
+				fill: "#ffffff",
+				fontWeight: "bold",
+				editable: true,
+			});
+			canvas.add(text);
+			canvas.setActiveObject(text);
+			canvas.requestRenderAll();
 		};
 
 		const pointerDiff = (evt) => {
@@ -447,10 +698,11 @@
 						strokeLineJoin: "round",
 					});
 				} else {
+					const isDashed = mode === "dashed-arrow" || mode === "dashed-line";
 					activeShape = new fabric.Line([x, y, x, y], {
 						stroke: "#ffd60a",
 						strokeWidth: 3,
-						strokeDashArray: mode === "dashed-arrow" || mode === "dashed-line" ? [10, 6] : null,
+						strokeDashArray: isDashed ? [10, 6] : [],
 					});
 				}
 
@@ -556,22 +808,37 @@
 				case "select":
 					setMode("select");
 					break;
-				case "add-home":
-					addPlayer(promptLabel("Home") || "H", "#2563eb", "#1d4ed8");
+				case "player": {
+					const color = toolbar.find("[data-select='player-color']").val() || "#2563eb";
+					addPlayer("P", color, "#111111");
 					setMode("select");
 					break;
-				case "add-away":
-					addPlayer(promptLabel("Away") || "A", "#dc2626", "#b91c1c");
-					setMode("select");
-					break;
+				}
 				case "add-ball":
 					addBall();
 					setMode("select");
 					break;
-				case "add-cone":
-					addCone();
+				case "cone": {
+					const color = toolbar.find("[data-select='cone-color']").val() || "#f97316";
+					addCone(color);
 					setMode("select");
 					break;
+				}
+				case "marker": {
+					const color = toolbar.find("[data-select='marker-color']").val() || "#facc15";
+					addMarker(color);
+					setMode("select");
+					break;
+				}
+				case "text":
+					addText();
+					setMode("select");
+					break;
+				case "arrows": {
+					const type = toolbar.find("[data-select='arrow-type']").val() || "arrow";
+					setMode(type);
+					break;
+				}
 				case "arrow":
 					setMode("arrow");
 					break;
@@ -611,6 +878,25 @@
 				default:
 					break;
 			}
+		});
+
+		toolbar.on("change", "select[data-select='arrow-type']", (e) => {
+			const type = e.currentTarget.value;
+			if (type) {
+				setMode(type);
+			}
+		});
+
+		toolbar.on("change", "select[data-select='player-color']", (e) => {
+			applyColorToSelection(canvas, e.currentTarget.value, "player");
+		});
+
+		toolbar.on("change", "select[data-select='cone-color']", (e) => {
+			applyColorToSelection(canvas, e.currentTarget.value, "cone");
+		});
+
+		toolbar.on("change", "select[data-select='marker-color']", (e) => {
+			applyColorToSelection(canvas, e.currentTarget.value, "marker");
 		});
 	}
 
@@ -674,6 +960,45 @@
 			canvas.discardActiveObject();
 		} else {
 			canvas.remove(active);
+		}
+		canvas.requestRenderAll();
+	}
+
+	function applyColorToSelection(canvas, color, shapeType) {
+		const active = canvas.getActiveObject();
+		if (!active) {
+			return;
+		}
+
+		const updateObject = (obj) => {
+			if (!obj) {
+				return;
+			}
+			if (shapeType === "player" && obj.type === "group" && obj.data?.shapeType === "player") {
+				const body = obj._objects?.find((o) => o.name === "player-body");
+				if (body) {
+					body.set({ fill: color });
+					obj.dirty = true;
+				}
+				return;
+			}
+			if (shapeType === "marker" && obj.type === "group" && obj.data?.shapeType === "marker") {
+				const body = obj._objects?.find((o) => o.name === "marker-body");
+				if (body) {
+					body.set({ fill: color });
+					obj.dirty = true;
+				}
+				return;
+			}
+			if (shapeType === "cone" && obj.data?.shapeType === "cone") {
+				obj.set({ fill: color });
+			}
+		};
+
+		if (active.type === "activeSelection") {
+			active.forEachObject((obj) => updateObject(obj));
+		} else {
+			updateObject(active);
 		}
 		canvas.requestRenderAll();
 	}

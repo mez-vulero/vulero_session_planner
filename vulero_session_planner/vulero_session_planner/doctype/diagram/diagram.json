@@ -21,7 +21,7 @@
       "fieldname": "pitch_type",
       "fieldtype": "Select",
       "label": "Pitch Type",
-      "options": "Full\nHalf\nThird\nCustom",
+      "options": "Full\nHalf\nThird",
       "default": "Full",
       "in_list_view": 1
     },

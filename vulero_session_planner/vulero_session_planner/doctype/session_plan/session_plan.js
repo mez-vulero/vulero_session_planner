@@ -1,6 +1,8 @@
 frappe.ui.form.on("Session Plan", {
 	refresh(frm) {
 		set_target_group_options(frm);
+		refresh_block_diagram_previews(frm);
+		validate_duration_limit(frm);
 
 		if (frm.is_new()) {
 			return;
@@ -54,10 +56,15 @@ frappe.ui.form.on("Session Plan", {
 	},
 	license_program(frm) {
 		set_target_group_options(frm);
+		validate_duration_limit(frm);
 	},
 	cohort(frm) {
 		// Cohort changes can update license_program via server defaults
 		set_target_group_options(frm);
+		validate_duration_limit(frm);
+	},
+	duration_minutes(frm) {
+		validate_duration_limit(frm);
 	},
 });
 
@@ -74,6 +81,20 @@ frappe.ui.form.on("Session Plan Block", {
 		});
 	},
 });
+
+function refresh_block_diagram_previews(frm) {
+	const rows = frm.doc.blocks || [];
+	rows.forEach((row) => {
+		if (row.diagram && !row.diagram_preview) {
+			frappe.db.get_value("Diagram", row.diagram, "preview_image").then((r) => {
+				const preview = r && r.message ? r.message.preview_image : "";
+				if (preview) {
+					frappe.model.set_value(row.doctype, row.name, "diagram_preview", preview);
+				}
+			});
+		}
+	});
+}
 
 function set_target_group_options(frm) {
 	const program = frm.doc.license_program;
@@ -116,10 +137,12 @@ function apply_target_group_options(frm, programValue) {
 	let options = [];
 
 	if (key === "CAF D") {
-		options = ["U12", "U11", "U10", "U9", "U8", "U7"];
+		options = ["U12", "U9"];
 	} else if (key === "CAF C") {
-		options = ["U13", "U14", "U15", "U16", "U17", "U18", "U20", "U21"];
-	} else if (key === "CAF B" || key === "CAF A" || key === "CAF PRO") {
+		options = ["U17", "U14"];
+	} else if (key === "CAF B") {
+		options = ["Second Division Club", "U20", "U17"];
+	} else if (key === "CAF A" || key === "CAF PRO") {
 		options = ["Senior Team"];
 	}
 
@@ -128,4 +151,45 @@ function apply_target_group_options(frm, programValue) {
 		frm.set_value("target_group", "");
 	}
 	frm.refresh_field("target_group");
+}
+
+function get_duration_limit(programValue) {
+	const key = normalize_program(programValue);
+	if (key === "CAF D") {
+		return 60;
+	}
+	if (key === "CAF C" || key === "CAF B" || key === "CAF A" || key === "CAF PRO") {
+		return 90;
+	}
+	return null;
+}
+
+function validate_duration_limit(frm) {
+	const duration = frm.doc.duration_minutes;
+	if (!duration) {
+		return;
+	}
+	const program = frm.doc.license_program;
+	if (!program) {
+		return;
+	}
+
+	let limit = get_duration_limit(program);
+	if (!limit && !is_known_program(program)) {
+		frappe.db.get_value("License Program", program, "program_name").then((r) => {
+			if (r && r.message && r.message.program_name) {
+				const resolvedLimit = get_duration_limit(r.message.program_name);
+				if (resolvedLimit && duration > resolvedLimit) {
+					frappe.msgprint(
+						`Duration cannot exceed ${resolvedLimit} minutes for ${r.message.program_name}.`
+					);
+				}
+			}
+		});
+		return;
+	}
+
+	if (limit && duration > limit) {
+		frappe.msgprint(`Duration cannot exceed ${limit} minutes for ${program}.`);
+	}
 }

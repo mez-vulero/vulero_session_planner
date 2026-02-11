@@ -19,6 +19,7 @@ class SessionPlan(Document):
 		self._set_defaults_from_coach()
 		self._ensure_editable_for_state()
 		self._ensure_blocks_for_state()
+		self._validate_duration_limit()
 		self._validate_time_totals()
 		self._set_current_instructor_on_submit()
 		self._apply_approval_lock()
@@ -92,6 +93,41 @@ class SessionPlan(Document):
 				alert=True,
 				indicator="orange",
 			)
+
+	def _normalize_program(self, value):
+		return (value or "").upper().strip().replace("  ", " ")
+
+	def _get_duration_limit(self):
+		if not self.license_program:
+			return None, None
+
+		def resolve_limit(program_name):
+			key = self._normalize_program(program_name)
+			if key == "CAF D":
+				return 60
+			if key in {"CAF C", "CAF B", "CAF A", "CAF PRO"}:
+				return 90
+			return None
+
+		limit = resolve_limit(self.license_program)
+		if limit:
+			return limit, self.license_program
+
+		program_name = frappe.db.get_value("License Program", self.license_program, "program_name")
+		if program_name:
+			limit = resolve_limit(program_name)
+			if limit:
+				return limit, program_name
+
+		return None, None
+
+	def _validate_duration_limit(self):
+		if not self.duration_minutes:
+			return
+		limit, program_name = self._get_duration_limit()
+		if limit and self.duration_minutes > limit:
+			label = program_name or self.license_program or "the selected program"
+			frappe.throw(f"Duration cannot exceed {limit} minutes for {label}.")
 
 	def _set_current_instructor_on_submit(self):
 		if self.current_instructor:
