@@ -28,6 +28,12 @@
       "in_list_view": 1
     },
     {
+      "fieldname": "assistant_coach",
+      "fieldtype": "Link",
+      "label": "Assistant Coach",
+      "options": "Coach Profile"
+    },
+    {
       "fieldname": "basics_column_break",
       "fieldtype": "Column Break"
     },
@@ -79,6 +85,16 @@
       "fieldtype": "Date",
       "label": "Session Date",
       "in_list_view": 1
+    },
+    {
+      "fieldname": "session_time",
+      "fieldtype": "Time",
+      "label": "Session Time"
+    },
+    {
+      "fieldname": "training_location",
+      "fieldtype": "Data",
+      "label": "Training Location"
     },
     {
       "fieldname": "number_of_players",

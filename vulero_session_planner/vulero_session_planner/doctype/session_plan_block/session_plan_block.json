@@ -34,6 +34,14 @@
       "in_list_view": 1
     },
     {
+      "fieldname": "phase",
+      "fieldtype": "Select",
+      "label": "Phase",
+      "options": "Warming up\nMain part\nCooling down",
+      "in_list_view": 1,
+      "reqd": 1
+    },
+    {
       "fieldname": "diagram",
       "fieldtype": "Link",
       "label": "Diagram",

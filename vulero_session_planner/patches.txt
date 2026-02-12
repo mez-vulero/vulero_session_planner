@@ -5,3 +5,4 @@
 [post_model_sync]
 # Patches added in this section will be executed after doctypes are migrated
 vulero_session_planner.patches.v1_0.rename_head_instructor_role
+vulero_session_planner.patches.v1_0.remove_head_instructor_workspace

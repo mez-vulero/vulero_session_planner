@@ -138,12 +138,43 @@
 
 		if (window.frappe && typeof frappe.ready === "function") {
 			frappe.ready(function () {
+				filterWorkspaceIcons();
 				setTimeout(showInstallPrompt, 1000);
 			});
 		} else {
 			document.addEventListener("DOMContentLoaded", function () {
+				filterWorkspaceIcons();
 				setTimeout(showInstallPrompt, 1000);
 			});
+		}
+	}
+
+	function filterWorkspaceIcons() {
+		if (!window.frappe || !frappe.boot || !frappe.boot.workspaces) {
+			return;
+		}
+		var pages = (frappe.boot.workspaces.pages || []).map(function (p) {
+			return p.name;
+		});
+		if (!pages.length) {
+			return;
+		}
+		var allowed = {};
+		pages.forEach(function (name) {
+			allowed[name] = true;
+		});
+		var icons = frappe.boot.desktop_icons || [];
+		var filtered = icons.filter(function (icon) {
+			var isWorkspace = icon.icon_type === "Link" && icon.link_type === "Workspace Sidebar";
+			return !isWorkspace || allowed[icon.label];
+		});
+		if (filtered.length === icons.length) {
+			return;
+		}
+		frappe.boot.desktop_icons = filtered;
+		frappe.desktop_icons = filtered;
+		if (frappe.pages && frappe.pages["desktop"] && frappe.pages["desktop"].desktop_page) {
+			frappe.pages["desktop"].desktop_page.update();
 		}
 	}
 
