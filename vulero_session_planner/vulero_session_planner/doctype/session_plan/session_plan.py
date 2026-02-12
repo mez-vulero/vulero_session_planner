@@ -31,7 +31,6 @@ class SessionPlan(Document):
 		elif self._status_changed_to("Changes Requested"):
 			self._notify_changes_requested()
 		elif self._status_changed_to("Approved"):
-			self._generate_pdf_export()
 			self._notify_approved()
 		self._sync_diagram_links()
 
@@ -197,24 +196,6 @@ class SessionPlan(Document):
 				document_name=self.name,
 			)
 
-	def _generate_pdf_export(self):
-		try:
-			pdf_content = frappe.get_print("Session Plan", self.name, as_pdf=True)
-			file_doc = frappe.get_doc(
-				{
-					"doctype": "File",
-					"file_name": f"{self.name}.pdf",
-					"content": pdf_content,
-					"is_private": 1,
-					"attached_to_doctype": "Session Plan",
-					"attached_to_name": self.name,
-				}
-			)
-			file_doc.save(ignore_permissions=True)
-			frappe.db.set_value("Session Plan", self.name, "pdf_export", file_doc.file_url)
-		except Exception:
-			frappe.log_error(title="Session Plan PDF Export Failed")
-
 	def _sync_diagram_links(self):
 		for block in self.blocks or []:
 			if not block.diagram:
@@ -271,7 +252,6 @@ def create_revision(session_plan_name):
 	new_plan.name = None
 	new_plan.status = "Draft"
 	new_plan.locked = 0
-	new_plan.pdf_export = None
 	new_plan.revised_from = plan.name
 	new_plan.version_no = (plan.version_no or 1) + 1
 	new_plan.approved_version = plan.approved_version
